@@ -1,0 +1,53 @@
+{
+  "name": "tournament-buzz-backend",
+  "version": "1.0.0",
+  "description": "Backend for TournamentBuzz Junior Design Team 8107",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "lint": "prettier --write \"**/*.js\" & eslint \"**/*.js\"",
+    "eslint": "eslint \"**/*.js\"",
+    "prettier": "prettier --write \"**/*.js\"",
+    "test": "jest & eslint \"**/*.js\"",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write",
+      "eslint",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TournamentBuzz/main.git"
+  },
+  "author": "JIB 8107",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TournamentBuzz/main/issues"
+  },
+  "homepage": "https://github.com/TournamentBuzz/main#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.3",
+    "google-auth-library": "^3.1.0",
+    "googleapis": "^37.2.0",
+    "jsonwebtoken": "^8.3.0",
+    "log4js": "^3.0.5",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "stripe": "^6.15.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "husky": "^0.14.3",
+    "jest": "^24.1.0",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2",
+    "supertest": "^3.3.0"
+  }
+}

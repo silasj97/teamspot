@@ -1,0 +1,1 @@
+Running MySQL Server 8.0.12 on localhost port 3306

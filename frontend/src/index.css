@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  --RibbonHeight: 56px;
+  --HeaderHeight: 64px;
+
+  --HeaderSize: 24px;
+  --HeaderWeight: 400;
+
+  --LargeSize: 18px;
+  --SmallSize: 14px;
+
+  --TextColor: #ffffff;
+  --LightColor: #36393f;
+  --MediumColor: #2f3136;
+  --DarkColor: #202225;
+  --HighlightColor: #7289da;
+}
