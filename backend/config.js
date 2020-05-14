@@ -12,10 +12,10 @@ module.exports = {
   },
   databaseConfig: {
     host: process.env.DB_HOST || "localhost",
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
+    username: process.env.DB_USERNAME || "root",
+    password: process.env.DB_PASSWORD || "root",
     port: process.env.DB_PORT || "3306",
-    schema: process.env.DB_NAME || "tournamentbuzz"
+    schema: process.env.DB_NAME || "teamspot"
   },
   stripeConfig: {
     secretKey: process.env.STRIPE_SECRET_KEY

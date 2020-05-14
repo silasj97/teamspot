@@ -29,8 +29,7 @@
   },
   "homepage": "https://github.com/TournamentBuzz/main#readme",
   "dependencies": {
-    "bcrypt": "^4.0.1",
-    "dotenv": "^8.2.0",
+    "bcrypt": "^3.0.8",
     "express": "^4.16.3",
     "google-auth-library": "^3.1.0",
     "googleapis": "^37.2.0",

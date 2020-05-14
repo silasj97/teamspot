@@ -18,7 +18,8 @@ function getUsers(connection) {
 
 function createUser(connection, uname, email, password) {
   const query =
-    "INSERT INTO users(email, password, userName, usesGoogleAuth) VALUES(?, ?, ?, ?)";
+    "INSERT INTO users(email, password, userName) VALUES(?, ?, ?)";
+    //"INSERT INTO users(email, password, userName, usesGoogleAuth) VALUES(?, ?, ?, ?)";
   return new Promise(async (resolve, reject) => {
     const hash = await bcrypt.hash(password, saltRounds);
     connection.query(query, [email, hash, uname, false], function(
@@ -85,7 +86,7 @@ function updateUser(connection, email, fieldName, fieldValue) {
 
 function checkCredentials(connection, email, password) {
   const query =
-    "SELECT password FROM users WHERE email = ? AND usesGoogleAuth = ?;";
+    "SELECT password FROM users WHERE email = ?;"; //AND usesGoogleAuth = ?;";
   return new Promise((resolve, reject) => {
     connection.query(query, [email, false], function(err, rows, fields) {
       if (err) {

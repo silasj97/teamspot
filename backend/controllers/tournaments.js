@@ -15,8 +15,9 @@ const requireAuth = require("../middleware/auth/verify");
 router.get("/", async function(req, res, next) {
   try {
     const c = req.app.get("databaseConnection");
-    const results = await sqlwrapper.getTournaments(c);
+    const results = await sqlwrapper.getMilestones(c);
     res.status(200);
+    console.log(results)
     res.json({ tournaments: results });
   } catch (err) {
     next(err);
