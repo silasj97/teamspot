@@ -1,8 +1,8 @@
-# TournamentBuzz
+# Teamspot
 
 ## Release Notes
 
-### Version 1.0.0
+### Adapted with permission from [TournamentBuzz](https://github.com/TournamentBuzz/main)
 
 ### Features for this release
 * User Registration
@@ -52,14 +52,15 @@ Download Zip: https://github.com/TournamentBuzz/main/archive/master.zip
 * In your terminal, open up the location you downloaded the application
 * Use the `cd` command to get into the backend folder
 * Run `npm ci` to install the dependencies
+* Run `npm i bycrpt` to resolve errors
 #### Database
-* Create a mysql user with any username and password
+* Create a mysql user with username and password
 * Run backend/model/setup.sql under the new mysql user to initialize the tables
 
 ### Run instructions
 * Make sure your webserver is running
 * Make sure mysql is running
-* Set your backend environment variables:
+* Create .env file in set environment variables in the following format `VARIABLE=VALUE`
   * PORT - the port the backend will run on
   * AUTH_EC_KEY - JWT secret key (set to something secure)
   * DB_HOST - database hostname (defaults to localhost)
