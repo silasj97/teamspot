@@ -6,6 +6,8 @@ const sqlwrapper = require("../model/wrapper");
 
 const create = require("./milestones/create");
 
+const requireAuth = require("../middleware/auth/verify");
+
 router.get("/", async function(req, res, next) {
   try {
     const c = req.app.get("databaseConnection");
@@ -17,7 +19,7 @@ router.get("/", async function(req, res, next) {
   }
 });
 
-//router.use("/create", requireAuth, create)
+router.use("/create", requireAuth, create)
 //router.use("/edit", requireAuth, edit)
 //router.use("/delete", requireAuth, deletejs)
 //router.use("/id", id)

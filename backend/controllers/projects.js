@@ -6,6 +6,8 @@ const sqlwrapper = require("../model/wrapper");
 
 const create = require("./components/create");
 
+const requireAuth = require("../middleware/auth/verify");
+
 router.get("/", async function(req, res, next) {
   try {
     const con = req.app.get("databaseConnection");
@@ -25,5 +27,7 @@ router.get("/", async function(req, res, next) {
     next(err);
   }
 });
+
+router.use("/create", requireAuth, create);
 
 module.exports = router;
