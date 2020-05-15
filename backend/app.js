@@ -69,7 +69,7 @@ if (app.get("serverConfig").env === "development") {
   });
 }
 
-app.use("/api/projects", projects);
+app.use("/api/project", projects);
 app.use("/api/components", components);
 app.use("/api/milestones", milestones);
 app.use("/api/tasks", tasks);
@@ -77,9 +77,7 @@ app.use("/api/teams", teams);
 app.use("/api/user", user);
 
 
-//app.use("/api/tournaments", tournaments);
-//app.use("/api/matches", matches);
-//app.use("/api/invites", requireAuth, invites);
+app.use("/api/tournaments", projects);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

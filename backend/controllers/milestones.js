@@ -11,11 +11,6 @@ router.get("/", async function(req, res, next) {
     const c = req.app.get("databaseConnection");
     const results = await sqlwrapper.getMilestones(c);
     res.status(200);
-    console.log(results);
-    for (var i in results) {
-      results[i][tasks] = { tasks: sqlwrapper.getMilestoneTasks(c, results[i].milestone_id) };
-    }
-    console.log(results);
     res.json({ milestones: results });
   } catch (err) {
     next(err);

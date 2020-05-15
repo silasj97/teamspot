@@ -1,5 +1,7 @@
 "use strict";
 
+//const express = require("express");
+
 module.exports = {
   createProject: (
     connection,
@@ -22,7 +24,7 @@ module.exports = {
           if (err) {
             reject(err);
           } else {
-            resolve(err);
+            resolve(rows);
           }
         }
       )
