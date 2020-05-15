@@ -3,12 +3,13 @@
 module.exports = {
   createTask: (
     connection,
-    task_name = null,
+    task_name,
     milestone_id,
-    priority = 0,
-    description = "",
-    deadline = null,
-    comments = ""
+    priority,
+    description,
+    deadline,
+    comments,
+    completed
   ) => {
     let query = "";
     return new Promise((resolve, reject) => {
@@ -19,7 +20,8 @@ module.exports = {
           priority,
           description,
           deadline,
-          comments
+          comments,
+          completed
         ],
         (err, rows, fields) => {
           if (err) {
@@ -58,6 +60,12 @@ module.exports = {
   updateTask: (
     connection
   ) => {
+
+  },
+  send: (connection, id, message) => {
+
+  },
+  getMessages: (connection, id) => {
 
   }
 };

@@ -5,10 +5,11 @@
 module.exports = {
   createProject: (
     connection,
-    project_name = null,
-    deadline = null,
-    project_description = "",
-    comments = ""
+    project_name,
+    deadline,
+    project_description,
+    comments,
+    completed
   ) => {
     let query = "INSERT INTO project(project_name, deadline, project_description, comments) VALUES(?, ?, ?, ?, ?)";
     return new Promise((resolve, reject) => {
@@ -18,7 +19,8 @@ module.exports = {
           project_name,
           deadline,
           project_description,
-          comments
+          comments,
+          completed
         ],
         (err, rows, fields) => {
           if (err) {
@@ -69,6 +71,12 @@ module.exports = {
   updateProject: (
     connection
   ) => {
+
+  },
+  send: (connection, message) => {
+
+  },
+  getMessages: (connection) => {
 
   }
 };

@@ -3,8 +3,9 @@
 module.exports = {
   createComponent: (
     connection,
-    component_name = null,
-    project_id
+    component_name,
+    project_id,
+    comments
   ) => {
     let query = "INSERT INTO project_component(component_name, project_id) VALUES(?, ?)";
     return new Promise((resolve, reject) => {
@@ -12,7 +13,8 @@ module.exports = {
         query,
         [
           component_name,
-          project_id
+          project_id,
+          comments
         ],
         (err, rows, fields) => {
           if (err) {
@@ -63,6 +65,12 @@ module.exports = {
   updateComponent: (
     connection
   ) => {
+
+  },
+  send: (connection, id, message) => {
+
+  },
+  getMessages: (connection, id) => {
 
   }
 };

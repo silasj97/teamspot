@@ -3,11 +3,13 @@
 module.exports = {
   createMilestone: (
     connection,
-    milestone_name = null,
+    milestone_name,
     project_component_id,
-    priority = 0,
-    description = "",
-    deadline = null
+    priority,
+    description,
+    deadline,
+    comments,
+    completed
   ) => {
     let query = "INSERT INTO milestone(milestone_name, project_component_id, priority, description, deadline, comments) VALUES(?, ?, ?, ?, ?, ?)";
     return new Promise((resolve, reject) => {
@@ -18,7 +20,8 @@ module.exports = {
           priority,
           description,
           deadline,
-          comments
+          comments,
+          completed
         ],
         (err, rows, fields) => {
           if (err) {
@@ -69,6 +72,12 @@ module.exports = {
   updateMilestone: (
     connection
   ) => {
+
+  },
+  send: (connection, id, message) => {
+
+  },
+  getMessages: (connection, id) => {
 
   }
 };
