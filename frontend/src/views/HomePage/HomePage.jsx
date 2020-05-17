@@ -22,7 +22,11 @@ import Timeline from "../../components/Timeline/Timeline";
 const HomePage = ({ classes, login, register, ...rest }) => {
   return (
     <S.HomePage>
+
+      {/* <Ribbon></Ribbon> */}
+
       <S.HeaderContainer>
+
         <Header
           color="primary"
           brand="Teamspot"
