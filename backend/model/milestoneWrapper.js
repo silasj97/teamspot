@@ -11,7 +11,7 @@ module.exports = {
     comments,
     completed
   ) => {
-    let query = "INSERT INTO milestone(milestone_name, project_component_id, priority, description, deadline, comments) VALUES(?, ?, ?, ?, ?, ?)";
+    let query = "INSERT INTO milestone(milestone_name, project_component_id, priority, description, deadline, comments completed) VALUES(?, ?, ?, ?, ?, ?, ?)";
     return new Promise((resolve, reject) => {
       connection.query(query,
         [

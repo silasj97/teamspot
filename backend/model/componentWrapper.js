@@ -7,7 +7,7 @@ module.exports = {
     project_id,
     comments
   ) => {
-    let query = "INSERT INTO project_component(component_name, project_id) VALUES(?, ?)";
+    let query = "INSERT INTO project_component(component_name, project_id, comments) VALUES(?, ?, ?)";
     return new Promise((resolve, reject) => {
       connection.query(
         query,
@@ -67,7 +67,7 @@ module.exports = {
   ) => {
 
   },
-  send: (connection, id, message) => {
+  sendMesage: (connection, id, message) => {
 
   },
   getMessages: (connection, id) => {
