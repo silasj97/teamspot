@@ -1,6 +1,8 @@
 import * as S from "./styles";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import ProjectAPI from "components/API/ProjectAPI.js";
 
 const milestones = [
   {
@@ -34,6 +36,24 @@ const milestones = [
 ];
 
 const Outline = () => {
+
+  const [milestones, setMilestones] = useState([])
+
+  async function createOutlineList() {
+    let components = undefined;
+    try {
+      components = await ProjectAPI.getComponents();
+      setMilestones(components[0].milestones)
+
+    } catch (error) {
+      
+    }  
+  }
+
+  useEffect(() => {
+    createOutlineList()
+  }, [])
+
   return (
     <S.Outline>
       <S.Header>
@@ -43,9 +63,9 @@ const Outline = () => {
       <S.Content>
         {milestones.map(milestone => (
           <S.MilestoneContainer>
-            <S.Milestone>{milestone.name}</S.Milestone>
+            <S.Milestone>{milestone.milestone_name}</S.Milestone>
             {milestone.tasks.map(task => (
-              <S.Task>{task.name}</S.Task>
+              <S.Task>{task.task_name}</S.Task>
             ))}
           </S.MilestoneContainer>
         ))}
