@@ -5,6 +5,7 @@ const router = express.Router();
 const sqlwrapper = require("../model/wrapper");
 
 const create = require("./tasks/create");
+const assign = require("./tasks/assign");
 
 const requireAuth = require("../middleware/auth/verify");
 

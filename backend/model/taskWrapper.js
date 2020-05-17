@@ -11,7 +11,7 @@ module.exports = {
     comments,
     completed
   ) => {
-    let query = "";
+    let query = "INSERT INTO task(task_name, milestone_id, priority, description, deadline, comments, completed) VALUES(?, ?, ?, ?, ?, ?, ?)";
     return new Promise((resolve, reject) => {
       connection.query(query,
         [
@@ -62,10 +62,22 @@ module.exports = {
   ) => {
 
   },
-  send: (connection, id, message) => {
+  sendMessage: (connection, id, message) => {
 
   },
   getMessages: (connection, id) => {
 
+  },
+  assign: (connection, user_id, task_id) => {
+    let query = "INSERT INTO assigned(user_id, task_id) VALUES(${user_id}, ${task_id})";
+    return new Promise((res, rej) => {
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      });
+    });
   }
 };

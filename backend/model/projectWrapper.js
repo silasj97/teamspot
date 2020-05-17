@@ -11,7 +11,7 @@ module.exports = {
     comments,
     completed
   ) => {
-    let query = "INSERT INTO project(project_name, deadline, project_description, comments) VALUES(?, ?, ?, ?, ?)";
+    let query = "INSERT INTO project(project_name, deadline, project_description, comments, completed) VALUES(?, ?, ?, ?, ?, ?)";
     return new Promise((resolve, reject) => {
       connection.query(
         query,
@@ -73,7 +73,7 @@ module.exports = {
   ) => {
 
   },
-  send: (connection, message) => {
+  sendMessage: (connection, message) => {
 
   },
   getMessages: (connection) => {
