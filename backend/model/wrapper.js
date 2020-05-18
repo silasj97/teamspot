@@ -49,6 +49,9 @@ module.exports = {
   sendMessageProject: (connection, message) => {
     return projectWrapper.sendMessage(connection, message);
   },
+  completeProject: (connection, id) => {
+    return projectWrapper.complete(connection, id);
+  },
   //component functions
   createComponent: (
     connection
@@ -78,6 +81,9 @@ module.exports = {
   },
   sendMessageComponent: (connection, id, message) => {
     return componentWrapper.send(connection, id, message);
+  },
+  completeMilestone: (connection, id) => {
+    return componentWrapper.complete(connection, id);
   },
   //milestone functions
   createMilestone: (
@@ -138,6 +144,9 @@ module.exports = {
   },
   assignTask: (connection, user_id, task_id) => {
     return taskWrapper.assign(connection, user_id, task_id);
+  },
+  completeTask: (connection, id) => {
+    return taskWrapper.complete(connection, id);
   },
   //user functions
   userExists: (connection, email) => {

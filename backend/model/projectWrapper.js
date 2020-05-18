@@ -78,5 +78,17 @@ module.exports = {
   },
   getMessages: (connection) => {
 
+  },
+  complete: (connection, id) => {
+    let query = "UPDATE project SET completed = 1 where id = '${id}'";
+    return new Promise((res, rej) => {
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      });
+    });
   }
 };

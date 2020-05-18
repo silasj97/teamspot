@@ -5,7 +5,7 @@ const router = express.Router();
 const sqlwrapper = require("../model/wrapper");
 
 const create = require("./milestones/create");
-
+const complete = require("./milestones/complete");
 const requireAuth = require("../middleware/auth/verify");
 
 router.get("/", async function(req, res, next) {
@@ -19,10 +19,7 @@ router.get("/", async function(req, res, next) {
   }
 });
 
-router.use("/create", requireAuth, create)
-//router.use("/edit", requireAuth, edit)
-//router.use("/delete", requireAuth, deletejs)
-//router.use("/id", id)
-//router.use("/search", search)
+router.use("/create", requireAuth, create);
+router.use("/complete", requireAuth, create);
 
 module.exports = router;

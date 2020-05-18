@@ -4,8 +4,8 @@ const express = require("express");
 const router = express.Router();
 const sqlwrapper = require("../model/wrapper");
 
-const create = require("./components/create");
-
+const create = require("./projects/create");
+const complete = require("./projects/complete");
 const requireAuth = require("../middleware/auth/verify");
 
 router.get("/", async function(req, res, next) {
@@ -29,5 +29,6 @@ router.get("/", async function(req, res, next) {
 });
 
 router.use("/create", requireAuth, create);
+router.use("/complete", requireAuth, create);
 
 module.exports = router;

@@ -79,5 +79,17 @@ module.exports = {
         }
       });
     });
+  },
+  complete: (connection, id) => {
+    let query = "UPDATE task SET completed = 1 where id = '${id}'";
+    return new Promise((res, rej) => {
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      });
+    });
   }
 };
