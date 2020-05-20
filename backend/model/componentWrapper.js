@@ -72,5 +72,29 @@ module.exports = {
   },
   getMessages: (connection, id) => {
 
+  },
+  complete: (connection, id) => {
+    let query = "UPDATE project_component SET completed = 1 where id = '${id}'";
+    return new Promise((res, rej) => {
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      });
+    });
+  },
+  delete: (connection, id) => {
+    let query = "DELETE FROM project_component WHERE id = ${id};";
+    return new Promise((res, rej) => {
+      connection.query(query, (err, rows, fields) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      });
+    });
   }
 };

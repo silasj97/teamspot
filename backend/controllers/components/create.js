@@ -24,7 +24,7 @@ router.post("", async (req, res, next) => {
         null,
       );
       res.status(200);
-      res.json({ projectID: rows.id})
+      res.json({ id: rows.id})
     } catch (err) {
       err.status = 500;
       next(err);
