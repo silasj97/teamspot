@@ -52,6 +52,9 @@ module.exports = {
   completeProject: (connection, id) => {
     return projectWrapper.complete(connection, id);
   },
+  deleteProject: (connection, id) => {
+    return projectWrapper.delete(connection, id);
+  },
   //component functions
   createComponent: (
     connection
@@ -85,6 +88,9 @@ module.exports = {
   completeMilestone: (connection, id) => {
     return componentWrapper.complete(connection, id);
   },
+  deleteComponent: (connection, id) => {
+    return componentWrapper.delete(connection, id);
+  },
   //milestone functions
   createMilestone: (
     connection
@@ -114,6 +120,9 @@ module.exports = {
   },
   sendMessageMilestone: (connection, id, message) => {
     return milestoneWrapper.sendMessage(connection, id, message);
+  },
+  deleteMilestone: (connection, id) => {
+    return milestoneWrapper.delete(connection, id);
   },
   //task functions
   createTask: (
@@ -147,6 +156,9 @@ module.exports = {
   },
   completeTask: (connection, id) => {
     return taskWrapper.complete(connection, id);
+  },
+  deleteTask: (connection, id) => {
+    return taskWrapper.delete(connection, id);
   },
   //user functions
   userExists: (connection, email) => {
