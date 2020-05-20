@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import SkyLight from 'react-skylight'
+
+export const Modal = styled(SkyLight)`
+
+`
 
 export const Timeline = styled.div`
   flex-grow: 1;
@@ -42,3 +47,26 @@ export const ButtonContainer = styled.div`
 export const Or = styled.div`
   padding: 32px;
 `;
+
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`
+
+export const TextInput = styled.input`
+  display: flex;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+  width: 150px;
+`
+
+export const SelectInput = styled.select`
+  display: flex;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+  width: 150px;
+`
