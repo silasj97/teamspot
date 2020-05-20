@@ -7,10 +7,10 @@ const router = express.Router();
 router.post("", async (req, res, next) => {
   if (
     !req.body.task_name ||
-    !milestone_id ||
-    !priority ||
-    !description ||
-    !deadline
+    !req.body.milestone_id ||
+    !req.body.priority ||
+    !req.body.description ||
+    !req.body.deadline
   ) {
     const err = new Error("Malformed Request");
     err.status = 400;
