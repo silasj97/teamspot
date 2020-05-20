@@ -25,8 +25,8 @@ router.post("", async (req, res, next) => {
         req.body.milestone_name,
         req.body.project_component_id,
         req.body.priority,
-        description,
-        deadline,
+        req.body.description,
+        req.body.deadline,
         null,
         0
       );
