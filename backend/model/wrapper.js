@@ -21,10 +21,16 @@ module.exports = {
   },
   //project functions
   createProject: (
-    connection
+    connection,
+    project_name,
+    deadline,
+    project_description
   ) => {
     return projectWrapper.createProject(
-      connection
+      connection,
+      project_name,
+      deadline,
+      project_description
     );
   },
   getProjects: (connection) => {
@@ -57,10 +63,14 @@ module.exports = {
   },
   //component functions
   createComponent: (
-    connection
+    connection,
+    component_name,
+    project_id,
   ) => {
     return componentWrapper.createComponent(
-      connection
+      connection,
+      component_name,
+      project_id,
     );
   },
   getComponents: (connection) => {
@@ -93,10 +103,20 @@ module.exports = {
   },
   //milestone functions
   createMilestone: (
-    connection
+    connection,
+    milestone_name,
+    project_component_id,
+    priority,
+    description,
+    deadline
   ) => {
     return milestoneWrapper.createMilestone(
-      connection
+      connection,
+      milestone_name,
+      project_component_id,
+      priority,
+      description,
+      deadline
     );
   },
   getMilestones: (connection) => {
@@ -126,10 +146,20 @@ module.exports = {
   },
   //task functions
   createTask: (
-    connection
+    connection,
+    task_name,
+    milestone_id,
+    priority,
+    description,
+    deadline
   ) => {
     return taskWrapper.createTask(
-      connection
+      connection,
+      task_name,
+      milestone_id,
+      priority,
+      description,
+      deadline
     );
   },
   getTasks: (connection) => {
