@@ -2,11 +2,11 @@ import * as S from "./styles";
 
 import React, { useEffect, useState } from "react";
 
-const Outline = ({ milestones }) => {
+const Outline = ({ milestones, activeComponent }) => {
   return (
     <S.Outline>
       <S.Header>
-        <S.HeaderText>Outline</S.HeaderText>
+        <S.HeaderText>{activeComponent}</S.HeaderText>
       </S.Header>
 
       <S.Content>

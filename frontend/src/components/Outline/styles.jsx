@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Outline = styled.div`
   width: 272px;
   height: 100vh;
-  background: var(--LightColor);
+  background: var(--MediumColor);
   color: var(--TextColor);
 `;
 
@@ -24,7 +24,6 @@ export const HeaderText = styled.h1`
 `;
 
 export const Content = styled.div`
-  padding-top: 8px;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;

@@ -8,7 +8,7 @@ export const Modal = styled(SkyLight)`
 export const Timeline = styled.div`
   flex-grow: 1;
   height: 100vh;
-  background: var(--DarkColor);
+  background: var(--LightColor);
   color: var(--TextColor);
 `;
 
@@ -16,12 +16,10 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: left;
-  width: calc(100% - 2px);
+  width: 100%;
   height: var(--HeaderHeight);
-  background: var(--MediumColor);
+  background: var(--LightColor);
   border-bottom: solid var(--DarkColor) 1px;
-  border-left: solid var(--DarkColor) 1px;
-  border-right: solid var(--DarkColor) 1px;
 `;
 
 export const HeaderText = styled.h1`
@@ -40,7 +38,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 96px;
+  height: 80px;
   width: 100%;
 `;
 

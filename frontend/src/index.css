@@ -5,18 +5,19 @@ body {
 }
 
 :root {
-  --RibbonHeight: 56px;
-  --HeaderHeight: 64px;
+  --RibbonHeight: 48px;
+  --HeaderHeight: 48px;
 
-  --HeaderSize: 24px;
-  --HeaderWeight: 400;
+  --HeaderSize: 18px;
+  --HeaderWeight: 600;
 
   --LargeSize: 18px;
   --SmallSize: 14px;
 
-  --TextColor: #ffffff;
+  --TextColor: #eeeeee;
   --LightColor: #36393f;
   --MediumColor: #2f3136;
   --DarkColor: #202225;
+  --ButtonColor: #40444B;
   --HighlightColor: #7289da;
 }

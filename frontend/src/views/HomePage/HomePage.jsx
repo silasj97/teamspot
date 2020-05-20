@@ -80,7 +80,10 @@ const HomePage = ({ classes, login, register, ...rest }) => {
         activeComponent={activeComponent} 
         onClickFunction={setActiveComponentFunction}
       />
-      <Outline milestones={milestones} />
+      <Outline 
+        milestones={milestones}
+        activeComponent={activeComponent} 
+      />
       <Timeline milestones={milestones}/>
       <Comments />
     </S.HomePage>

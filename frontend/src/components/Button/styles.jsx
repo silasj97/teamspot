@@ -11,7 +11,7 @@ export const Button = styled.div`
   border-radius: 16px;
   margin: var(--Margin);
   background: ${props =>
-    props.emphasize ? "var(--HighlightColor)" : "var(--LightColor)"};
+    props.emphasize ? "var(--HighlightColor)" : "var(--ButtonColor)"};
   cursor: pointer;
   &:hover {
     background: var(--HighlightColor);
