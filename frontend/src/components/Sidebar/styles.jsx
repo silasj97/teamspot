@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const Logo = styled.img`
+  width: 36px;
+  height: 36px;
+  margin: 12px;
+  margin-top: 24px;
+`
+
 export const Sidebar = styled.div`
   width: 72px;
   height: 100vh;
@@ -10,11 +17,10 @@ export const Sidebar = styled.div`
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   width: 100%;
-  height: var(--HeaderHeight);
-  background: var(--MediumColor);
-  border-right: solid var(--DarkColor) 1px;
+  /* background: var(--MediumColor);
+  border-right: solid var(--DarkColor) 1px; */
 `;
 
 export const HeaderText = styled.h1`
@@ -29,11 +35,17 @@ export const Component = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 100%;
-  margin: 8px;
-  font-weight: var(--HeaderWeight);
+  width: 48px;
+  height: 48px;
+  margin: 12px;
+  font-weight: 600;
   background: ${props => props.active ? 'var(--HighlightColor)' : 'var(--LightColor)'};
+  border-radius: ${props => props.active ? '16px' : '100%'};
+
   cursor: pointer;
+  transition: .4s;
+  &:hover {
+    background: var(--HighlightColor);
+    border-radius: 16px;
+  }
 `

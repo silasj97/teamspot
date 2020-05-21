@@ -6,7 +6,7 @@ const Sidebar = ({activeComponent, components, onClickFunction}) => {
   return (
     <S.Sidebar>
       <S.Header>
-        <S.HeaderText>T</S.HeaderText>
+        <S.Logo src={require('./teamspot-logo.svg')} />
       </S.Header>
       {
         components.map(component => 
