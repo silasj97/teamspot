@@ -6,7 +6,7 @@ import ProjectAPI from "components/API/ProjectAPI.js"
 
 import Button from "../Button/Button"
 
-const Timeline = ({ milestones }) => {
+const Timeline = ({ milestones, updateCallback, activeComponent, activeComponentId }) => {
   const [type, setType] = useState('Milestone')
 
   const simpleDialog = useRef()
@@ -34,22 +34,36 @@ const Timeline = ({ milestones }) => {
   const [description, setDescription] = useState('')
   const [deadline, setDeadline] = useState('')
 
-  async function submit() {
-    const props = {
-      task_name: name,
-      milestone_id: milestoneId,
-      priority,
-      description,
-      deadline
-    }
+  const milestoneSelect = useRef()
 
-    alert(JSON.stringify(props))
+  async function submit() {
+    let props
+
+    if (type === 'Task') {
+      props = {
+        task_name: name,
+        milestone_id: milestoneSelect.current.value,
+        priority,
+        description,
+        deadline
+      }
+    }
+    else {
+      props = {
+        milestone_name: name,
+        project_component_id: activeComponentId,
+        priority,
+        description,
+        deadline
+      }
+    }
     
     try {
-      await ProjectAPI.createTask(props)
+      type === 'Milestone' ?  await ProjectAPI.createMilestone(props) : await ProjectAPI.createTask(props)
     } catch(e) {
       console.error(e)
     }
+    window.location.reload()
   }
 
   const renderModal = () => {
@@ -57,22 +71,27 @@ const Timeline = ({ milestones }) => {
       <S.Modal
         hideOnOverlayClicked 
         ref={simpleDialog}
-        title={'Add ' + type} 
+        title={'New ' + type} 
         dialogStyles={modalStyles}
       >
         <S.Inputs>
-          <S.TextInput type='text' placeholder='task name' onChange={e => setName(e.target.value)}></S.TextInput>
-          <S.SelectInput onChange={e => setMilestoneId(e.target.value)}>
+          {
+            type === 'Task' ?
+            <S.SelectInput ref={milestoneSelect}>
             {
               milestones.map(milestone => <option value={milestone.id}>{milestone.milestone_name}</option>)
             }
-          </S.SelectInput>
-
-          <S.TextInput type='number' placeholder='priority' onChange={e => setPriority(e.target.value)}></S.TextInput>
-          <S.TextInput type='text' placeholder='description' onChange={e => setDescription(e.target.value)}></S.TextInput>
+            </S.SelectInput>
+            : null
+          }
+      
+          <S.TextInput type='text' placeholder={type + ' Name'} onChange={e => setName(e.target.value)}></S.TextInput>
+          <S.TextInput type='number' placeholder='Priority' onChange={e => setPriority(e.target.value)}></S.TextInput>
+          <S.TextInput type='text' placeholder='Description' onChange={e => setDescription(e.target.value)}></S.TextInput>
           <S.TextInput type='date' onChange={e => setDeadline(e.target.value)}></S.TextInput>
           <Button text='Submit' onClickFunction={() => submit()}/>
         </S.Inputs>
+
       </S.Modal>
     )
   }

@@ -23,7 +23,8 @@ export const Button = styled.div`
 `;
 
 export const Text = styled.div`
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 600;
   line-height: 0;
   margin-left: ${props => (props.icon ? "8px" : "0px")};
 `;

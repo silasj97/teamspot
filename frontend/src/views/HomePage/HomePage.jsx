@@ -27,33 +27,40 @@ const HomePage = ({ classes, login, register, ...rest }) => {
   const [milestones, setMilestones] = useState([])
   const [components, setComponents] = useState([])
   const [activeComponent, setActiveComponent] = useState('')
+  const [activeComponentId, setActiveComponentId] = useState(null)
 
-  async function createOutlineList() {
-    let apiProjectComponents = undefined;
+  async function getComponents() {
     try {
-      apiProjectComponents = await ProjectAPI.getComponents()
-      console.log(apiProjectComponents)
+      const apiProjectComponents = await ProjectAPI.getComponents()
       setProjectComponents(apiProjectComponents)
+      console.log(apiProjectComponents)
       setComponents(apiProjectComponents.map(component => component.component_name))
       setMilestones(apiProjectComponents[0].milestones)
       setActiveComponent(apiProjectComponents[0].component_name)
+      setActiveComponentId(apiProjectComponents[0].project_component_id)
     } catch (error) {
       
     }  
   }
 
   useEffect(() => {
-    createOutlineList()
+    getComponents()
   }, [])
 
   useEffect(() => {
     const activeComponentIndex = projectComponents.findIndex(component => component.component_name === activeComponent)
     if (activeComponentIndex >= 0) {
       setMilestones(projectComponents[activeComponentIndex].milestones)
+      setActiveComponentId(projectComponents[activeComponentIndex].id)
     }
+    
   }, [activeComponent])
 
   const setActiveComponentFunction = payload => setActiveComponent(payload)
+
+  const updateCallback = () => {
+    getComponents()
+  }
 
   return (
     <S.HomePage>
@@ -82,9 +89,14 @@ const HomePage = ({ classes, login, register, ...rest }) => {
       />
       <Outline 
         milestones={milestones}
-        activeComponent={activeComponent} 
+        activeComponent={activeComponent}
+        updateCallback={updateCallback}
       />
-      <Timeline milestones={milestones}/>
+      <Timeline
+        milestones={milestones}
+        activeComponent={activeComponent}
+        activeComponentId={activeComponentId}
+      />
       <Comments />
     </S.HomePage>
   );
