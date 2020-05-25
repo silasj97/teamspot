@@ -64,7 +64,7 @@ const customInputStyle = {
     }
   },
   input: {
-    color: "#495057",
+    color: "white",
     "&,&::placeholder": {
       fontSize: "14px",
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -78,7 +78,7 @@ const customInputStyle = {
   },
   whiteInput: {
     "&,&::placeholder": {
-      color: "#FFFFFF",
+      color: "black",
       opacity: "1"
     }
   }

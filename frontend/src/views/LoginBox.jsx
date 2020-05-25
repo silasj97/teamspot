@@ -83,17 +83,6 @@ class LoginBox extends React.Component {
                     <h2>Login</h2>
                   </CardHeader>
                   <CardBody>
-                    <center>
-                      <GoogleLogin
-                        clientId="802305630809-pdjvhcuo362ii6qfo0617u4ag8fgttad.apps.googleusercontent.com"
-                        buttonText="Login with Google"
-                        onSuccess={this.googleLogin}
-                        onFailure={this.googleLogin}
-                      />
-                    </center>
-                    <FormHelperText error>
-                      {this.state.formError}
-                    </FormHelperText>
                     <CustomInput
                       labelText="Email"
                       id="loginEmail"

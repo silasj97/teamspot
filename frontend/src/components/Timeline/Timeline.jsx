@@ -22,14 +22,11 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
     background: 'var(--LightColor)',
     color: '#ffffff',
     width: '200px',
-    marginLeft: '-200px',
-    height: 'auto',
-    borderRadius: '16px',
-    padding: '16px'
+    left: 'calc(50% + 200px)',
+    borderRadius: '8px'
   }
 
   const [name, setName] = useState('')
-  const [milestoneId, setMilestoneId] = useState(1)
   const [priority, setPriority] = useState(1)
   const [description, setDescription] = useState('')
   const [deadline, setDeadline] = useState('')
@@ -60,10 +57,10 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
     
     try {
       type === 'Milestone' ?  await ProjectAPI.createMilestone(props) : await ProjectAPI.createTask(props)
-    } catch(e) {
-      console.error(e)
-    }
-    window.location.reload()
+    } 
+    catch(e) { }
+
+    updateCallback()
   }
 
   const renderModal = () => {
@@ -86,10 +83,19 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
           }
       
           <S.TextInput type='text' placeholder={type + ' Name'} onChange={e => setName(e.target.value)}></S.TextInput>
-          <S.TextInput type='number' placeholder='Priority' onChange={e => setPriority(e.target.value)}></S.TextInput>
+
+          <S.RadioInput onChange={e => setPriority(e.target.value)}>
+            <input type='radio' value='1' name='priority' defaultChecked />Low
+            <input type='radio' value='2' name='priority' />Mid
+            <input type='radio' value='3' name='priority' />High
+          </S.RadioInput>
+
+
           <S.TextInput type='text' placeholder='Description' onChange={e => setDescription(e.target.value)}></S.TextInput>
           <S.TextInput type='date' onChange={e => setDeadline(e.target.value)}></S.TextInput>
-          <Button text='Submit' onClickFunction={() => submit()}/>
+          <S.ButtonInput>
+            <Button text='Submit' onClickFunction={() => submit()}/>
+          </S.ButtonInput>
         </S.Inputs>
 
       </S.Modal>
@@ -105,7 +111,7 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
       {
         renderModal()
       }
-
+      
       <S.Content>
         <S.ButtonContainer>
           <Button
