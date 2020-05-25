@@ -10,11 +10,8 @@ const components = require('./controllers/components');
 const milestones = require('./controllers/milestones');
 const tasks = require('./controllers/tasks');
 const teams = require('./controllers/teams');
-const user = require("./controllers/user");
-
-//const tournaments = require("./controllers/tournaments");
-//const matches = require("./controllers/matches");
-//const invites = require("./controllers/invites");
+const user = require('./controllers/user');
+const chat = require('./controllers/chat');
 
 const requireAuth = require("./middleware/auth/verify");
 
@@ -75,9 +72,6 @@ app.use("/api/milestones", milestones);
 app.use("/api/tasks", tasks);
 app.use("/api/teams", teams);
 app.use("/api/user", user);
-
-
-app.use("/api/tournaments", projects);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

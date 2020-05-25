@@ -21,4 +21,4 @@ router.post("", async (req, res, next) => {
   }
 });
 
-module.export = router;
+module.exports = router;

@@ -8,7 +8,7 @@ module.exports = {
     comments
   ) => {
     let query = "INSERT INTO project_component(component_name, project_id, comments) VALUES(?, ?, ?)";
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
       connection.query(
         query,
         [
@@ -18,9 +18,9 @@ module.exports = {
         ],
         (err, rows, fields) => {
           if (err) {
-            reject(err);
+            rej(err);
           } else {
-            resolve(err);
+            res(err);
           }
         }
       )
@@ -52,26 +52,38 @@ module.exports = {
   },
   getComponentMilestones: (connection, componentID) => {
     let query = `SELECT * FROM milestone WHERE project_component_id = "${componentID}"`;
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
       connection.query(query, (err, rows, fields) => {
         if (err) {
-          reject(err);
+          rej(err);
         } else {
-          resolve(rows);
+          res(rows);
         }
       });
     });
   },
   updateComponent: (
-    connection
+    connection,
+    component_name,
+    id
   ) => {
-
-  },
-  sendMesage: (connection, id, message) => {
-
-  },
-  getMessages: (connection, id) => {
-
+    let query = "UPDATE project_component SET component_name = ? WHERE id = ?;";
+    return new Promise((res, rej) => {
+      connection.query(
+        query,
+        [
+          component_name,
+          id
+        ],
+        (err, rows, fields) => {
+          if (err) {
+            rej(err);
+          } else {
+            res(rows);
+          }
+        }
+      )
+    });
   },
   complete: (connection, id) => {
     let query = "UPDATE project_component SET completed = 1 where id = '${id}'";

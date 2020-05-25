@@ -27,7 +27,7 @@ module.exports = {
           if (err) {
             reject(err);
           } else {
-            resolve(err);
+            resolve(rows);
           }
         }
       );
@@ -58,15 +58,33 @@ module.exports = {
     });
   },
   updateTask: (
-    connection
+    connection,
+    task_name,
+    priority,
+    description,
+    deadline,
+    id
   ) => {
-
-  },
-  sendMessage: (connection, id, message) => {
-
-  },
-  getMessages: (connection, id) => {
-
+    let query = "UPDATE milestone SET task_name = ?, priority = ?, description = ?, deadline = ? WHERE id = ?;";
+    return new Promise((resolve, reject) => {
+      connection.query(
+        query,
+        [
+          task_name,
+          priority,
+          description,
+          deadline,
+          id
+        ],
+        (err, rows, fields) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        }
+      )
+    });
   },
   assign: (connection, user_id, task_id) => {
     let query = "INSERT INTO assigned(user_id, task_id) VALUES(${user_id}, ${task_id})";
