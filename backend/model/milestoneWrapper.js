@@ -11,8 +11,8 @@ module.exports = {
     comments,
     completed
   ) => {
-    let query = "INSERT INTO milestone(milestone_name, project_component_id, priority, description, deadline, comments completed) VALUES(?, ?, ?, ?, ?, ?, ?)";
-    return new Promise((resolve, reject) => {
+    let query = "INSERT INTO milestone(milestone_name, project_component_id, priority, description, deadline, comments, completed) VALUES(?, ?, ?, ?, ?, ?, ?)";
+    return new Promise((res, rej) => {
       connection.query(query,
         [
           milestone_name,
@@ -25,9 +25,9 @@ module.exports = {
         ],
         (err, rows, fields) => {
           if (err) {
-            reject(err);
+            rej(err);
           } else {
-            resolve(rows);
+            res(rows);
           }
         }
       );
@@ -59,26 +59,44 @@ module.exports = {
   },
   getMilestoneTasks: (connection, milestoneID) => {
     let query = `SELECT * FROM task WHERE milestone_id = "${milestoneID}"`;
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
       connection.query(query, (err, rows, fields) => {
         if (err) {
-          reject(err);
+          rej(err);
         } else {
-          resolve(rows);
+          res(rows);
         }
       });
     });
   },
   updateMilestone: (
-    connection
+    connection,
+    milestone_name,
+    priority,
+    description,
+    deadline,
+    id
   ) => {
-
-  },
-  send: (connection, id, message) => {
-
-  },
-  getMessages: (connection, id) => {
-
+    let query = "UPDATE milestone SET milestone_name = ?, priority = ?, description = ?, deadline = ? WHERE id = ?;";
+    return new Promise((resolve, reject) => {
+      connection.query(
+        query,
+        [
+          milestone_name,
+          priority,
+          description,
+          deadline,
+          id
+        ],
+        (err, rows, fields) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        }
+      )
+    });
   },
   complete: (connection, id) => {
     let query = "UPDATE milestone SET completed = 1 where id = '${id}'";

@@ -12,7 +12,7 @@ module.exports = {
     completed
   ) => {
     let query = "INSERT INTO project(project_name, deadline, project_description, comments, completed) VALUES(?, ?, ?, ?, ?, ?)";
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
       connection.query(
         query,
         [
@@ -24,9 +24,9 @@ module.exports = {
         ],
         (err, rows, fields) => {
           if (err) {
-            reject(err);
+            rej(err);
           } else {
-            resolve(rows);
+            res(rows);
           }
         }
       )
@@ -58,26 +58,42 @@ module.exports = {
   },
   getProjectComponents: (connection, projectID) => {
     let query = `SELECT * FROM components WHERE project_id = "${projectID};"`;
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
       connection.query(query, (err, rows, fields) => {
         if (err) {
-          reject(err);
+          rej(err);
         } else {
-          resolve(rows);
+          res(rows);
         }
       });
     });
   },
   updateProject: (
-    connection
+    connection,
+    project_name,
+    deadline,
+    project_description,
+    id
   ) => {
-
-  },
-  sendMessage: (connection, message) => {
-
-  },
-  getMessages: (connection) => {
-
+    let query = "UPDATE project SET project_name = ?, deadline = ?, project_description = ? WHERE id = ?;";
+    return new Promise((res, rej) => {
+      connection.query(
+        query,
+        [
+          project_name,
+          deadline,
+          project_description,
+          id
+        ],
+        (err, rows, fields) => {
+          if (err) {
+            rej(err);
+          } else {
+            res(rows);
+          }
+        }
+      )
+    });
   },
   complete: (connection, id) => {
     let query = "UPDATE project SET completed = 1 where id = ${id}";
