@@ -29,17 +29,16 @@ export const HeaderText = styled.h1`
 `;
 
 export const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
+  padding: 16px;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80px;
   width: 100%;
+  height: 48px;
+  padding-bottom: 16px;
 `;
 
 export const Or = styled.div`
@@ -87,4 +86,8 @@ export const SelectInput = styled.select`
 export const ButtonInput = styled.div`
   width: 100%;
   margin-top: 8px;
+`
+
+export const TimelineMilestones = styled.div`
+ 
 `

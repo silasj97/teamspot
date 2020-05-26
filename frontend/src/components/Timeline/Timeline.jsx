@@ -1,13 +1,16 @@
 import * as S from "./styles"
 
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 
 import ProjectAPI from "components/API/ProjectAPI.js"
 
 import Button from "../Button/Button"
+import TimelineMilestone from './TimelineMilestone/TimelineMilestone'
 
 const Timeline = ({ milestones, updateCallback, activeComponent, activeComponentId }) => {
   const [type, setType] = useState('Milestone')
+
+  useEffect(() => console.log(milestones))
 
   const simpleDialog = useRef()
 
@@ -124,6 +127,19 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
             onClickFunction={() => openDialog('Task')}
           />
         </S.ButtonContainer>
+
+        <S.TimelineMilestones>
+        {
+          milestones.map(milestone => 
+            <TimelineMilestone 
+              name={milestone.milestone_name}
+              deadline={milestone.deadline}
+              description={milestone.description}
+            />
+          )
+        }
+        </S.TimelineMilestones>
+
       </S.Content>
     </S.Timeline>
   )

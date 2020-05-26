@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  overflow: hidden;
 }
 
 :root {
@@ -20,4 +21,8 @@ body {
   --DarkColor: #202225;
   --ButtonColor: #40444B;
   --HighlightColor: #7289da;
+}
+
+* {
+  outline: none;
 }

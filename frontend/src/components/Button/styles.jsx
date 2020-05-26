@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from "styled-components";
 
 export const Button = styled.div`
-  color: var(--Text);
+  color: var(--Text) !important;
   display: flex;
   align-items: center;
   justify-content: center;
