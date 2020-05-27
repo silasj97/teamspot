@@ -4,9 +4,11 @@ const express = require("express");
 const router = express.Router();
 const sqlwrapper = require("../model/wrapper");
 
-const create = require("./tasks/create");
 const assign = require("./tasks/assign");
 const complete = require("./tasks/complete");
+const create = require("./tasks/create");
+const del = require("./tasks/delete");
+const update = require("./tasks/update");
 const requireAuth = require("../middleware/auth/verify");
 
 router.get("/", async function(req, res, next) {
@@ -20,7 +22,10 @@ router.get("/", async function(req, res, next) {
   }
 });
 
+router.use("/assign", requireAuth, assign);
 router.use("/create", requireAuth, create);
 router.use("/complete", requireAuth, create);
+router.use("/delete", requireAuth, del);
+router.use("/update", requireAuth, update);
 
 module.exports = router;

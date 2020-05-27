@@ -6,15 +6,16 @@ const milestoneWrapper = require("./milestoneWrapper");
 const taskWrapper = require("./taskWrapper");
 const userWrapper = require("./userWrapper");
 const teamWrapper = require("./teamWrapper");
+const chatWrapper = require("./chatWrapper");
 
 module.exports = {
   executeSQL: (connection, sql, varList) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
       connection.query(sql, varList, function(err, rows, fields) {
         if (err) {
-          reject(err);
+          rej(err);
         } else {
-          resolve(rows, fields);
+          res(rows, fields);
         }
       });
     });
@@ -43,17 +44,19 @@ module.exports = {
     return projectWrapper.getProjectComponents(connection, projectID);
   },
   updateProject: (
-    connection
+    connection,
+    project_name,
+    deadline,
+    project_description,
+    id
   ) => {
     return projectWrapper.updateProject(
-      connection
+      connection,
+      project_name,
+      deadline,
+      project_description,
+      id
     );
-  },
-  getMessagesProject: (connection) => {
-    return projectWrapper.getMessages(connection);
-  },
-  sendMessageProject: (connection, message) => {
-    return projectWrapper.sendMessage(connection, message);
   },
   completeProject: (connection, id) => {
     return projectWrapper.complete(connection, id);
@@ -83,17 +86,15 @@ module.exports = {
     return componentWrapper.getComponentMilestones(connection, componentID);
   },
   updateComponent: (
-    connection
+    connection,
+    component_name,
+    id
   ) => {
     return componentWrapper.updateComponent(
-      connection
+      connection,
+      component_name,
+      id
     );
-  },
-  getMessagesComponent: (connection, id) => {
-    return componentWrapper.getMessages(connection, id);
-  },
-  sendMessageComponent: (connection, id, message) => {
-    return componentWrapper.send(connection, id, message);
   },
   completeMilestone: (connection, id) => {
     return componentWrapper.complete(connection, id);
@@ -129,17 +130,21 @@ module.exports = {
     return milestoneWrapper.getMilestoneTasks(connection, milestoneID);
   },
   updateMilestone: (
-    connection
+    connection,
+    milestone_name,
+    priority,
+    description,
+    deadline,
+    id
   ) => {
     return milestoneWrapper.updateMilestone(
-      connection
+      connection,
+      milestone_name,
+      priority,
+      description,
+      deadline,
+      id
     );
-  },
-  getMessagesMilestone: (connection, id) => {
-    return milestoneWrapper.getMessages(connection, id);
-  },
-  sendMessageMilestone: (connection, id, message) => {
-    return milestoneWrapper.sendMessage(connection, id, message);
   },
   deleteMilestone: (connection, id) => {
     return milestoneWrapper.delete(connection, id);
@@ -169,17 +174,21 @@ module.exports = {
     return taskWrapper.getTask(connection, taskID);
   },
   updateTask: (
-    connection
+    connection,
+    task_name,
+    priority,
+    description,
+    deadline,
+    id
   ) => {
     return taskWrapper.updateTask(
-      connection
+      connection,
+      task_name,
+      priority,
+      description,
+      deadline,
+      id
     );
-  },
-  getMessagesTask: (connection, id) => {
-    return taskWrapper.getMessages(connection, id);
-  },
-  sendMessageTask: (connection, id, message) => {
-    return taskWrapper.sendMessage(connection, id, message);
   },
   assignTask: (connection, user_id, task_id) => {
     return taskWrapper.assign(connection, user_id, task_id);
@@ -216,5 +225,11 @@ module.exports = {
     return teamWrapper.createTeam(
       connection
     );
+  },
+  sendMessage: (connection) => {
+    return chatWrapper.send();
+  },
+  getMessage: (connection) => {
+    return chatWrapper.get();
   }
 }

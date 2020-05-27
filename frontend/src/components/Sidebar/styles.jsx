@@ -45,6 +45,7 @@ export const Component = styled.div`
     background: var(--HighlightColor);
     border-radius: 16px;
   }
+
   &:active {
     transform: translateY(1px);
   }

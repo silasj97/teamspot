@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS project (
     deadline				DATE,
     project_description		TEXT,
 	comments				TEXT,
+	emoji				CHAR(1) CHARACTER SET utf32,
 	completed				INT,
 
   CONSTRAINT pk_project
@@ -57,6 +58,7 @@ CREATE TABLE IF NOT EXISTS project_component (
 	component_name	VARCHAR(64),
 	project_id 		INT,
     comments    	TEXT,
+	emoji			CHAR(1) CHARACTER SET utf32,
 
 	CONSTRAINT pk_project_component
 		PRIMARY KEY(id),
@@ -86,12 +88,10 @@ CREATE TABLE IF NOT EXISTS on_project (
 );
 
 CREATE TABLE IF NOT EXISTS project_manager (
-
     id 				INT NOT NULL UNIQUE AUTO_INCREMENT,
     project_id			INT,
     user_id			INT(10),
 	
-
   CONSTRAINT pk_project_manager
 		PRIMARY KEY(id),
   CONSTRAINT fk_project_manager_project
@@ -105,7 +105,6 @@ CREATE TABLE IF NOT EXISTS project_manager (
 );
 
 CREATE TABLE IF NOT EXISTS milestone (
-
     id				INT NOT NULL UNIQUE AUTO_INCREMENT,
     milestone_name		VARCHAR(255),
     project_component_id			INT,
@@ -113,6 +112,7 @@ CREATE TABLE IF NOT EXISTS milestone (
     description			TEXT		NOT NULL,
     deadline			DATE,
 	comments			TEXT,
+	emoji				CHAR(1) CHARACTER SET utf32,
 	completed			INT,
 
   CONSTRAINT
@@ -123,9 +123,7 @@ CREATE TABLE IF NOT EXISTS milestone (
 				ON DELETE CASCADE
 
 );
-
 CREATE TABLE IF NOT EXISTS task (
-
     id				INT NOT NULL UNIQUE AUTO_INCREMENT,
     task_name			VARCHAR(255),
     milestone_id		INT,
@@ -133,6 +131,7 @@ CREATE TABLE IF NOT EXISTS task (
     description			TEXT		NOT NULL,
     deadline			DATE,
 	comments			TEXT,
+    emoji				CHAR(1) CHARACTER SET utf32,
 	completed			INT,
 
   CONSTRAINT
@@ -143,6 +142,12 @@ CREATE TABLE IF NOT EXISTS task (
 		ON DELETE CASCADE
 
 );
+/* NOTE: The code in the bottom shows the emoji showing up in the task table */
+/*
+INSERT INTO task (id, task_name, milestone_id, priority, description, deadline, comments, emoji, completed)
+VALUES (1, 'name', NULL, 1, 'description', '2016-09-13 08:02:29', 'comments', '😃', 0);
+SELECT * FROM task;
+*/
 
 CREATE TABLE IF NOT EXISTS assigned (
     user_id		INT(10),
@@ -166,4 +171,5 @@ CREATE TABLE IF NOT EXISTS assigned (
         REFERENCES task(id)
 		ON DELETE CASCADE
 );
+
 

@@ -5,6 +5,7 @@ const sqlwrapper = require("../../model/wrapper");
 const router = express.Router();
 
 router.post("", async (req, res, next) => {
+  console.log(req.body)
   if (
     !req.body.task_name ||
     !req.body.milestone_id ||

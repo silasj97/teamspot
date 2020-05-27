@@ -5,6 +5,8 @@ const config = require("./config");
 const app = require("./app");
 
 const port = config.serverConfig.port;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("Server running at port " + port);
 });
+
+module.exports = server;
