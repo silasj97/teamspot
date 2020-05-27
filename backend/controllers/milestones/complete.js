@@ -14,6 +14,7 @@ router.post("", async (req, res, next) => {
     const con = req.app.get("databaseConnection");
     const status = await sqlwrapper.checkMilestoneStatus(con, req.body.id);
     const obj = JSON.parse(JSON.stringify(status));
+    console.log(obj);
     if (obj.completed == 1) {
       const rows = await sqlwrapper.completeMilestone(con, req.body.id, 0);
     } else {

@@ -150,7 +150,7 @@ module.exports = {
     return milestoneWrapper.delete(connection, id);
   },
   checkMilestoneStatus: (connection, id) => {
-    return milestoneWrapper.checkSatus(connection, id);
+    return milestoneWrapper.checkStatus(connection, id);
   },
   //task functions
   createTask: (
