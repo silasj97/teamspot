@@ -96,9 +96,6 @@ module.exports = {
       id
     );
   },
-  completeMilestone: (connection, id) => {
-    return componentWrapper.complete(connection, id);
-  },
   deleteComponent: (connection, id) => {
     return componentWrapper.delete(connection, id);
   },
@@ -151,6 +148,9 @@ module.exports = {
   },
   checkMilestoneStatus: (connection, id) => {
     return milestoneWrapper.checkStatus(connection, id);
+  },
+  completeMilestone: (connection, id, status) => {
+    return milestoneWrapper.complete(connection, id, status);
   },
   //task functions
   createTask: (

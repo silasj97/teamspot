@@ -111,6 +111,7 @@ module.exports = {
     });
   },
   complete: (connection, id, status) => {
+    console.log(status);
     let query = "UPDATE milestone SET completed = ? where id = ?;";
     return new Promise((res, rej) => {
       connection.query(query,
