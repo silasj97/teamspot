@@ -10,7 +10,7 @@ import TimelineMilestone from './TimelineMilestone/TimelineMilestone'
 const Timeline = ({ milestones, updateCallback, activeComponent, activeComponentId }) => {
   const [type, setType] = useState('Milestone')
 
-  useEffect(() => console.log(milestones))
+  // useEffect(() => console.log(milestones))
 
   const simpleDialog = useRef()
 
@@ -115,8 +115,7 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
         renderModal()
       }
       
-      <S.Content>
-        <S.ButtonContainer>
+      <S.ButtonContainer>
           <Button
             text="New Milestone"
             onClickFunction={() => openDialog('Milestone')}
@@ -127,14 +126,21 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
             onClickFunction={() => openDialog('Task')}
           />
         </S.ButtonContainer>
+        
+      <S.Content>
+       
 
         <S.TimelineMilestones>
         {
-          milestones.map(milestone => 
+          milestones.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)).map(milestone => 
             <TimelineMilestone 
               name={milestone.milestone_name}
               deadline={milestone.deadline}
               description={milestone.description}
+              id={milestone.id}
+              updateCallback={updateCallback}
+              tasks={milestone.tasks}
+              complete={milestone.complete}
             />
           )
         }

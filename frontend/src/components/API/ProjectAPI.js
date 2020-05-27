@@ -52,4 +52,40 @@ export default class ProjectAPI {
       throw new errors.UnexpectedError();
     }
   }
+
+  static async markTaskComplete(props) {
+    if (!Authentication.loggedIn()) return;
+    const res = await fetch(
+      `${Config.base_url}/tasks/complete`,
+      {
+        method: "POST",
+        headers: Authentication.withJWT(),
+        body: JSON.stringify(props)
+      }
+    );
+    if (res.ok) {
+      const json = await res.json();
+      return json.generationSuccess;
+    } else {
+      throw new errors.UnexpectedError();
+    }
+  }
+
+  static async markMilestoneComplete(props) {
+    if (!Authentication.loggedIn()) return;
+    const res = await fetch(
+      `${Config.base_url}/milestones/complete`,
+      {
+        method: "POST",
+        headers: Authentication.withJWT(),
+        body: JSON.stringify(props)
+      }
+    );
+    if (res.ok) {
+      const json = await res.json();
+      return json.generationSuccess;
+    } else {
+      throw new errors.UnexpectedError();
+    }
+  }
 }
