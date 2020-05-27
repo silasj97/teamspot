@@ -12,7 +12,13 @@ router.post("", async (req, res, next) => {
     return;
   } try {
     const con = req.app.get("databaseConnection");
-    const rows = await sqlwrapper.completeMilestone(con, req.body.id);
+    const status = await sqlwrapper.checkMilestoneStatus(con, req.body.id);
+    const obj = JSON.parse(JSON.stringify(status));
+    if (obj.completed == 1) {
+      const rows = await sqlwrapper.completeMilestone(con, req.body.id, 0);
+    } else {
+      const rows = await sqlwrapper.completeMilestone(con, req.body.id, 1);
+    }
     res.status(200);
     res.json({ id: rows.id});
   } catch (err) {

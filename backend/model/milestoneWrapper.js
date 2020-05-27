@@ -98,10 +98,27 @@ module.exports = {
       )
     });
   },
-  complete: (connection, id) => {
-    let query = "UPDATE milestone SET completed = 1 where id = '${id}'";
-    return new Promise((res, rej) => {
+  checkSatus: (connection, id) => {
+    let query = "SELECT completed from milestone WHERE id = ?;";
+    return new Promis((res, rej) => {
       connection.query(query, (err, rows, fields) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(rows);
+        }
+      })
+    });
+  },
+  complete: (connection, id, status) => {
+    let query = "UPDATE milestone SET completed = ? where id = ?;";
+    return new Promise((res, rej) => {
+      connection.query(query,
+      [
+        status,
+        id
+      ],
+      (err, rows, fields) => {
         if (err) {
           rej(err);
         } else {
