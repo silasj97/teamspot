@@ -26,6 +26,7 @@ const HomePage = ({ classes, login, register, ...rest }) => {
   async function getComponents() {
     try {
       const apiProjectComponents = await ProjectAPI.getComponents()
+      console.log(apiProjectComponents)
       setProjectComponents(apiProjectComponents)
       setComponents(apiProjectComponents.map(component => component.component_name))
       setMilestones(apiProjectComponents[activeComponentIndex ? activeComponentIndex : 0].milestones)

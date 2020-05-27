@@ -10,7 +10,7 @@ const Outline = ({ milestones, activeComponent }) => {
       </S.Header>
 
       <S.Content>
-        {milestones.map(milestone => (
+        {milestones.sort((a, b) => new Date(a.deadline) - new Date(b.deadline)).map(milestone => (
           <S.MilestoneContainer>
             <S.Milestone>{milestone.milestone_name}</S.Milestone>
             {milestone.tasks.map(task => (

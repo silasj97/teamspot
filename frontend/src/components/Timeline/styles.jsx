@@ -30,6 +30,9 @@ export const HeaderText = styled.h1`
 
 export const Content = styled.div`
   padding: 16px;
+  padding-top: 0px;
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
 `;
 
 export const ButtonContainer = styled.div`
@@ -37,9 +40,10 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 80px;
+
   width: 100%;
   height: 48px;
-  padding-bottom: 16px;
+  padding: 16px 0px;
 `;
 
 export const Or = styled.div`
