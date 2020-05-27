@@ -98,10 +98,10 @@ module.exports = {
       )
     });
   },
-  checkSatus: (connection, id) => {
-    let query = "SELECT completed from milestone WHERE id = ?;";
-    return new Promis((res, rej) => {
-      connection.query(query, (err, rows, fields) => {
+  checkStatus: (connection, id) => {
+    let query = "SELECT completed FROM milestone WHERE id = ?;";
+    return new Promise((res, rej) => {
+      connection.query(query, [id], (err, rows, fields) => {
         if (err) {
           rej(err);
         } else {
