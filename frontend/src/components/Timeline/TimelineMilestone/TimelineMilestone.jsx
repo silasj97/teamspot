@@ -18,6 +18,8 @@ const TimelineMilestone = ({
 }) => {
   const ref = useRef()
 
+  console.log(complete)
+
   const [collapsed, setCollapsed ] = useState(true)
 
   async function submit() {
@@ -42,7 +44,7 @@ const TimelineMilestone = ({
     <S.TimelineMilestone onClick={() => setCollapsed(!collapsed)} >
       <S.Header active={collapsed}>
         <S.Name>{name}</S.Name>
-        <S.Complete type='checkbox' onClick={handleCompleteClick} value={complete} />
+        <S.Complete type='checkbox' onClick={handleCompleteClick} checked={complete === 1 ? true : false} />
         <S.Spacer />
         <S.Deadline>{new Date(deadline).toLocaleDateString("en-US")}</S.Deadline>
       </S.Header>
@@ -59,9 +61,12 @@ const TimelineMilestone = ({
         <S.EmojiButtons>
           <EmojiButton emoji={'👏'} reactions={4} />
           <EmojiButton emoji={'🎉'} reactions={4} />
-          <EmojiButton emoji={'👍'} reactions={4} />
+          <EmojiButton emoji={'🔥'} reactions={4} />
+          <EmojiButton emoji={'🤟'} reactions={4} />
           <EmojiButton emoji={'❤️'} reactions={4} />
           <EmojiButton emoji={'😍'} reactions={4} />
+          <EmojiButton emoji={'👀'} reactions={4} />
+          <EmojiButton emoji={'💵'} reactions={4} />
         </S.EmojiButtons>
 
         <S.Tasks>
