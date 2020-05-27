@@ -4,7 +4,6 @@ const express = require("express");
 const router = express.Router();
 const sqlwrapper = require("../model/wrapper");
 
-const complete = require("./components/complete");
 const create = require("./components/create");
 const del = require("./components/delete");
 const update = require("./components/update");
@@ -22,7 +21,6 @@ router.get("/", async function(req, res, next) {
 });
 
 router.use("/create", requireAuth, create);
-router.use("/complete", requireAuth, create);
 router.use("/delete", requireAuth, del);
 router.use("/update", requireAuth, update);
 

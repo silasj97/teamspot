@@ -24,7 +24,7 @@ router.get("/", async function(req, res, next) {
 
 router.use("/assign", requireAuth, assign);
 router.use("/create", requireAuth, create);
-router.use("/complete", requireAuth, create);
+router.use("/complete", requireAuth, complete);
 router.use("/delete", requireAuth, del);
 router.use("/update", requireAuth, update);
 
