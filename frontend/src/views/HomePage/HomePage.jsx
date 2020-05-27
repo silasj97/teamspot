@@ -1,121 +1,80 @@
-import * as S from "./styles";
+import * as S from "./styles"
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 
-import withStyles from "@material-ui/core/styles/withStyles";
+// APIs
+import Authentication from "components/API/Authentication.js"
+import ProjectAPI from "components/API/ProjectAPI.js"
 
 // core components
-import Header from "components/Header/Header.jsx";
-import headerLinksStyle from "assets/jss/components/headerLinksStyle.jsx";
-import NoAuthHeaderLinks from "components/Header/NoAuthHeaderLinks.jsx";
-import AuthHeaderLinks from "components/Header/AuthHeaderLinks.jsx";
-import TournamentList from "components/Tournament/TournamentList.jsx";
+import NoAuthHeaderLinks from "components/Header/NoAuthHeaderLinks.jsx"
+import AuthHeaderLinks from "components/Header/AuthHeaderLinks.jsx"
 
-import Authentication from "components/API/Authentication.js";
-
-//Teamspot
-import Ribbon from "../../components/Ribbon/Ribbon";
 import Sidebar from '../../components/Sidebar/Sidebar'
-import Outline from "../../components/Outline/Outline";
-import Comments from "../../components/Comments/Comments";
-import Timeline from "../../components/Timeline/Timeline";
-
-import ProjectAPI from "components/API/ProjectAPI.js";
+import Outline from "../../components/Outline/Outline"
+import Comments from "../../components/Comments/Comments"
+import Timeline from "../../components/Timeline/Timeline"
 
 const HomePage = ({ classes, login, register, ...rest }) => {
   const [projectComponents, setProjectComponents] = useState([])
   const [milestones, setMilestones] = useState([])
   const [components, setComponents] = useState([])
   const [activeComponent, setActiveComponent] = useState('')
+  const [activeComponentId, setActiveComponentId] = useState(null)
+  const [activeComponentIndex, setActiveComponentIndex] = useState(null)
 
-  async function createOutlineList() {
-    let apiProjectComponents = undefined;
+  async function getComponents() {
     try {
-      apiProjectComponents = await ProjectAPI.getComponents()
-      console.log(apiProjectComponents)
+      const apiProjectComponents = await ProjectAPI.getComponents()
       setProjectComponents(apiProjectComponents)
       setComponents(apiProjectComponents.map(component => component.component_name))
-      setMilestones(apiProjectComponents[0].milestones)
-      setActiveComponent(apiProjectComponents[0].component_name)
-    } catch (error) {
-      
-    }  
+      setMilestones(apiProjectComponents[activeComponentIndex ? activeComponentIndex : 0].milestones)
+      setActiveComponent(apiProjectComponents[activeComponentIndex ? activeComponentIndex : 0].component_name)
+      setActiveComponentId(apiProjectComponents[activeComponentIndex ? activeComponentIndex : 0].project_component_id)
+    } 
+    catch (error) {}  
   }
 
-  useEffect(() => {
-    createOutlineList()
-  }, [])
+  useEffect(() => getComponents(), [])
 
   useEffect(() => {
-    const activeComponentIndex = projectComponents.findIndex(component => component.component_name === activeComponent)
-    if (activeComponentIndex >= 0) {
-      setMilestones(projectComponents[activeComponentIndex].milestones)
+    const newActiveComponentIndex = projectComponents.findIndex(component => component.component_name === activeComponent)
+    setActiveComponentIndex(newActiveComponentIndex)
+    if (newActiveComponentIndex >= 0) {
+      setMilestones(projectComponents[newActiveComponentIndex].milestones)
+      setActiveComponentId(projectComponents[newActiveComponentIndex].id)
     }
   }, [activeComponent])
 
-  const setActiveComponentFunction = payload => setActiveComponent(payload)
-
   return (
     <S.HomePage>
-
-      {/* <Ribbon></Ribbon> */}
-
       <S.HeaderContainer>
-        <Header
-          color="primary"
-          brand="Teamspot"
-          rightLinks={
-            Authentication.loggedIn() ? (
-              <AuthHeaderLinks />
-            ) : (
-              <NoAuthHeaderLinks loginPage={login} registerPage={register} />
-            )
-          }
-          {...rest}
-        />
+        {
+          Authentication.loggedIn()
+          ? <AuthHeaderLinks />
+          : <NoAuthHeaderLinks loginPage={login} registerPage={register} />
+        }
       </S.HeaderContainer>
 
       <Sidebar 
         components={components} 
         activeComponent={activeComponent} 
-        onClickFunction={setActiveComponentFunction}
+        onClickFunction={payload => setActiveComponent(payload)}
       />
       <Outline 
         milestones={milestones}
-        activeComponent={activeComponent} 
+        activeComponent={activeComponent}
+        updateCallback={getComponents}
       />
-      <Timeline milestones={milestones}/>
+      <Timeline
+        milestones={milestones}
+        activeComponent={activeComponent}
+        activeComponentId={activeComponentId}
+        updateCallback={getComponents}
+      />
       <Comments />
     </S.HomePage>
-  );
-};
+  )
+}
 
-// class HomePage extends React.Component {
-//   render() {
-//     const { classes, login, register, ...rest } = this.props;
-//     return (
-//       <div>
-//         <div>
-//           <Outline />
-//           <Comments />
-//           {/* <Ribbon /> */}
-//           {/* <Header
-//             color="primary"
-//             brand="Teamspot"
-//             rightLinks={
-//               Authentication.loggedIn() ? (
-//                 <AuthHeaderLinks />
-//               ) : (
-//                 <NoAuthHeaderLinks loginPage={login} registerPage={register} />
-//               )
-//             }
-//             {...rest}
-//           /> */}
-//         </div>
-//         {/* <TournamentList /> */}
-//       </div>
-//     );
-//   }
-// }
-
-export default withStyles(headerLinksStyle)(HomePage);
+export default HomePage

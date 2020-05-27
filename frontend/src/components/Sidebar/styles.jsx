@@ -12,7 +12,7 @@ export const Sidebar = styled.div`
   height: 100vh;
   background: var(--DarkColor);
   color: var(--TextColor);
-`;
+`
 
 export const Header = styled.div`
   display: flex;
@@ -21,15 +21,13 @@ export const Header = styled.div`
   width: 100%;
   /* background: var(--MediumColor);
   border-right: solid var(--DarkColor) 1px; */
-`;
+`
 
 export const HeaderText = styled.h1`
   font-size: var(--HeaderSize);
   font-weight: var(--HeaderWeight);
   padding: 16px;
-`;
-
-
+`
 
 export const Component = styled.div`
   display: flex;
@@ -41,11 +39,14 @@ export const Component = styled.div`
   font-weight: 600;
   background: ${props => props.active ? 'var(--HighlightColor)' : 'var(--LightColor)'};
   border-radius: ${props => props.active ? '16px' : '100%'};
-
   cursor: pointer;
   transition: .4s;
   &:hover {
     background: var(--HighlightColor);
     border-radius: 16px;
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 `

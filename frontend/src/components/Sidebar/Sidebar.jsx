@@ -10,9 +10,12 @@ const Sidebar = ({activeComponent, components, onClickFunction}) => {
       </S.Header>
       {
         components.map(component => 
-          <S.Component active={activeComponent === component} onClick={() => onClickFunction(component)}>
+          <S.Component 
+            active={activeComponent === component} 
+            onClick={() => onClickFunction(component)}
+            title={component}
+          >
             {component.charAt(0).toUpperCase()}
-          
           </S.Component>
         )
       }

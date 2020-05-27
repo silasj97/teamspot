@@ -14,7 +14,6 @@ import Menu from "@material-ui/core/Menu";
 // core components
 import headerLinksStyle from "assets/jss/components/headerLinksStyle.jsx";
 import UserAuth from "components/API/UserAuth.js";
-import TeamAPI from "components/API/TeamAPI.js";
 
 class AuthHeaderLinks extends React.Component {
   constructor(props) {
@@ -50,17 +49,17 @@ class AuthHeaderLinks extends React.Component {
   }
 
   async componentDidMount() {
-    let pendingInvites;
-    try {
-      pendingInvites = await TeamAPI.getPendingInvites();
-    } catch (error) {
-      return;
-    }
-    if (pendingInvites === undefined || pendingInvites.length < 1) {
-      return;
-    } else {
-      this.setState({ notificationCount: pendingInvites.length });
-    }
+    // let pendingInvites;
+    // try {
+    //   pendingInvites = await TeamAPI.getPendingInvites();
+    // } catch (error) {
+    //   return;
+    // }
+    // if (pendingInvites === undefined || pendingInvites.length < 1) {
+    //   return;
+    // } else {
+    //   this.setState({ notificationCount: pendingInvites.length });
+    // }
   }
 
   render() {
@@ -71,38 +70,6 @@ class AuthHeaderLinks extends React.Component {
     return (
       <div>
         <List className={classes.list}>
-          <ListItem className={classes.listItem}>
-            <div>
-              <IconButton
-                aria-owns={open2 ? "menu-appbar2" : null}
-                aria-haspopup="true"
-                onClick={this.handleMenu2}
-                color="inherit"
-              >
-                <Badge badgeContent={this.state.notificationCount}>
-                  <NotificationIcon />
-                </Badge>
-              </IconButton>
-              <Menu
-                id="menu-appbar2"
-                anchorEl={anchorEl2}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={open2}
-                onClose={this.handleClose}
-              >
-                <MenuItem onClick={this.handleViewNotifications}>
-                  View Notifications
-                </MenuItem>
-              </Menu>
-            </div>
-          </ListItem>
           <ListItem className={classes.listItem}>
             <div>
               <IconButton
@@ -127,7 +94,6 @@ class AuthHeaderLinks extends React.Component {
                 open={open}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                 <MenuItem onClick={this.handleLogout}>Sign out</MenuItem>
               </Menu>
             </div>

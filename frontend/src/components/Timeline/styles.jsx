@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SkyLight from 'react-skylight'
 
 export const Modal = styled(SkyLight)`
-
+  height: auto;
 `
 
 export const Timeline = styled.div`
@@ -29,9 +29,7 @@ export const HeaderText = styled.h1`
 `;
 
 export const Content = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
+  padding: 16px;
 `;
 
 export const ButtonContainer = styled.div`
@@ -40,6 +38,8 @@ export const ButtonContainer = styled.div`
   align-items: center;
   height: 80px;
   width: 100%;
+  height: 48px;
+  padding-bottom: 16px;
 `;
 
 export const Or = styled.div`
@@ -55,16 +55,40 @@ export const Inputs = styled.div`
 
 export const TextInput = styled.input`
   display: flex;
-  padding: 8px;
-  margin: 8px;
+  padding: 8px 8px;
+  margin: 8px 0px;
   border-radius: 8px;
-  width: 150px;
+  width: calc(100% - 16px);
+  height: 24px;
+  border: none;
+`
+
+export const RadioInput = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 8px 0px;
+  margin: 4px 0px;
+  border-radius: 8px;
+  width: calc(100% - 16px);
+  height: 18px;
 `
 
 export const SelectInput = styled.select`
   display: flex;
-  padding: 8px;
-  margin: 8px;
+  padding: 8px 8px;
+  margin: 8px 0px;
   border-radius: 8px;
-  width: 150px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  line-height: 0;
+`
+
+export const ButtonInput = styled.div`
+  width: 100%;
+  margin-top: 8px;
+`
+
+export const TimelineMilestones = styled.div`
+ 
 `

@@ -1,12 +1,12 @@
+import * as S from './styles'
+
 import React from "react";
 
 // @material-ui/core components
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // core components
-import Button from "components/CustomButtons/Button.jsx";
+import Button from "components/Button/Button"
 import headerLinksStyle from "assets/jss/components/headerLinksStyle.jsx";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -44,28 +44,17 @@ class NoAuthHeaderLinks extends React.Component {
     const { classes } = this.props;
     return (
       <div>
-        <List className={classes.list}>
-          <ListItem className={classes.listItem}>
-            <Button
-              color="gold"
-              width="100%"
-              className={classes.navLink}
-              onClick={() => this.handleClickOpen("registerModal")}
-            >
-              Register
-            </Button>
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <Button
-              color="gold"
-              width="100%"
-              className={classes.navLink}
-              onClick={() => this.handleClickOpen("loginModal")}
-            >
-              Login
-            </Button>
-          </ListItem>
-        </List>
+        <S.ButtonContainer>
+          <Button
+            text={'Register'}
+            onClickFunction={() => this.handleClickOpen("registerModal")}
+          />
+          <Button
+            text={'Login'}
+            onClickFunction={() => this.handleClickOpen("loginModal")}
+          />
+        </S.ButtonContainer>
+    
         <Dialog
           classes={{
             root: classes.center,

@@ -1,13 +1,16 @@
 import * as S from "./styles"
 
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 
 import ProjectAPI from "components/API/ProjectAPI.js"
 
 import Button from "../Button/Button"
+import TimelineMilestone from './TimelineMilestone/TimelineMilestone'
 
-const Timeline = ({ milestones }) => {
+const Timeline = ({ milestones, updateCallback, activeComponent, activeComponentId }) => {
   const [type, setType] = useState('Milestone')
+
+  useEffect(() => console.log(milestones))
 
   const simpleDialog = useRef()
 
@@ -22,34 +25,45 @@ const Timeline = ({ milestones }) => {
     background: 'var(--LightColor)',
     color: '#ffffff',
     width: '200px',
-    marginLeft: '-200px',
-    height: 'auto',
-    borderRadius: '16px',
-    padding: '16px'
+    left: 'calc(50% + 200px)',
+    borderRadius: '8px'
   }
 
   const [name, setName] = useState('')
-  const [milestoneId, setMilestoneId] = useState(1)
   const [priority, setPriority] = useState(1)
   const [description, setDescription] = useState('')
   const [deadline, setDeadline] = useState('')
 
-  async function submit() {
-    const props = {
-      task_name: name,
-      milestone_id: milestoneId,
-      priority,
-      description,
-      deadline
-    }
+  const milestoneSelect = useRef()
 
-    alert(JSON.stringify(props))
+  async function submit() {
+    let props
+
+    if (type === 'Task') {
+      props = {
+        task_name: name,
+        milestone_id: milestoneSelect.current.value,
+        priority,
+        description,
+        deadline
+      }
+    }
+    else {
+      props = {
+        milestone_name: name,
+        project_component_id: activeComponentId,
+        priority,
+        description,
+        deadline
+      }
+    }
     
     try {
-      await ProjectAPI.createTask(props)
-    } catch(e) {
-      console.error(e)
-    }
+      type === 'Milestone' ?  await ProjectAPI.createMilestone(props) : await ProjectAPI.createTask(props)
+    } 
+    catch(e) { }
+
+    updateCallback()
   }
 
   const renderModal = () => {
@@ -57,22 +71,36 @@ const Timeline = ({ milestones }) => {
       <S.Modal
         hideOnOverlayClicked 
         ref={simpleDialog}
-        title={'Add ' + type} 
+        title={'New ' + type} 
         dialogStyles={modalStyles}
       >
         <S.Inputs>
-          <S.TextInput type='text' placeholder='task name' onChange={e => setName(e.target.value)}></S.TextInput>
-          <S.SelectInput onChange={e => setMilestoneId(e.target.value)}>
+          {
+            type === 'Task' ?
+            <S.SelectInput ref={milestoneSelect}>
             {
               milestones.map(milestone => <option value={milestone.id}>{milestone.milestone_name}</option>)
             }
-          </S.SelectInput>
+            </S.SelectInput>
+            : null
+          }
+      
+          <S.TextInput type='text' placeholder={type + ' Name'} onChange={e => setName(e.target.value)}></S.TextInput>
 
-          <S.TextInput type='number' placeholder='priority' onChange={e => setPriority(e.target.value)}></S.TextInput>
-          <S.TextInput type='text' placeholder='description' onChange={e => setDescription(e.target.value)}></S.TextInput>
+          <S.RadioInput onChange={e => setPriority(e.target.value)}>
+            <input type='radio' value='1' name='priority' defaultChecked />Low
+            <input type='radio' value='2' name='priority' />Mid
+            <input type='radio' value='3' name='priority' />High
+          </S.RadioInput>
+
+
+          <S.TextInput type='text' placeholder='Description' onChange={e => setDescription(e.target.value)}></S.TextInput>
           <S.TextInput type='date' onChange={e => setDeadline(e.target.value)}></S.TextInput>
-          <Button text='Submit' onClickFunction={() => submit()}/>
+          <S.ButtonInput>
+            <Button text='Submit' onClickFunction={() => submit()}/>
+          </S.ButtonInput>
         </S.Inputs>
+
       </S.Modal>
     )
   }
@@ -86,7 +114,7 @@ const Timeline = ({ milestones }) => {
       {
         renderModal()
       }
-
+      
       <S.Content>
         <S.ButtonContainer>
           <Button
@@ -99,6 +127,19 @@ const Timeline = ({ milestones }) => {
             onClickFunction={() => openDialog('Task')}
           />
         </S.ButtonContainer>
+
+        <S.TimelineMilestones>
+        {
+          milestones.map(milestone => 
+            <TimelineMilestone 
+              name={milestone.milestone_name}
+              deadline={milestone.deadline}
+              description={milestone.description}
+            />
+          )
+        }
+        </S.TimelineMilestones>
+
       </S.Content>
     </S.Timeline>
   )
