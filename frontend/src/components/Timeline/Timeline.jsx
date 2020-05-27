@@ -126,7 +126,7 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
             onClickFunction={() => openDialog('Task')}
           />
         </S.ButtonContainer>
-        
+
       <S.Content>
        
 
@@ -140,7 +140,7 @@ const Timeline = ({ milestones, updateCallback, activeComponent, activeComponent
               id={milestone.id}
               updateCallback={updateCallback}
               tasks={milestone.tasks}
-              complete={milestone.complete}
+              complete={milestone.completed}
             />
           )
         }
